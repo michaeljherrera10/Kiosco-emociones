@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Kiosco de Emociones y Principios</title>
+  <style>
+    :root {
+      --fondo: #f4f4f4;
+      --gris-claro: #a6192e;
+      --primario: #ffffff;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--fondo);
+      height: 100%;
+    }
+
+    .encabezado {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      padding: 5px 20px;
+      background-color: var(--gris-claro);
+    }
+
+    .encabezado .texto {
+      text-align: center;
+      z-index: 1;
+    }
+
+    .encabezado h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: var(--primario);
+    }
+
+    .encabezado p {
+      font-size: 1.5rem;
+      margin: 5px 0 0;
+      color: var(--primario);
+    }
+
+    .logo-superior-derecho {
+      height: 55px;
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      z-index: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: calc(100vh - 75px);
+    }
+
+    .divider {
+      width: 1px;
+      background-color: #ccc;
+    }
+
+    .column {
+      flex: 1;
+      padding: 5px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    .button-grid {
+      display: grid;
+      gap: 8px;
+      width: 95%;
+    }
+
+    #emociones.button-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    #principios.button-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    button {
+      font-size: 1.1rem;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      min-height: 65px;
+    }
+
+    button span.emoji {
+      font-size: 2.5rem;
+    }
+
+    button img {
+      height: 45px;
+      width: auto;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    .logo-principios, .logo-emociones {
+      height: 120px;
+      margin-bottom: 5px;
+    }
+
+    #mensajeFinal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 2rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1000;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #mensajeFinal span {
+      font-size: 5rem;
+    }
+
+    #mensajeMotivacional {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      max-width: 90%;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .logo-superior-derecho {
+        display: none;
+      }
+
+      #emociones.button-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #principios.button-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      button span.emoji {
+        font-size: 2rem;
+      }
+
+      .logo-principios, .logo-emociones {
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="encabezado">
+    <div class="texto">
+      <h1>GERENCIA CÓRDOBA</h1>
+      <p>Nos mueve lo que sentimos, nos guía lo que creemos.</p>
+    </div>
+    <img src="/static/logistica.png" alt="Logo Logística" class="logo-superior-derecho">
+  </div>
+  <div class="container">
+    <div class="column">
+      <img src="/static/medidor.png" alt="Medidor Emocional" class="logo-emociones">
+      <h2>¿Con qué emoción te identificas hoy?</h2>
+      <div class="button-grid" id="emociones">
+        <button><span class="emoji">😊</span> Alegría</button>
+        <button><span class="emoji">😌</span> Tranquilidad</button>
+        <button><span class="emoji">😥</span> Estrés</button>
+        <button><span class="emoji">😡</span> Frustración</button>
+        <button><span class="emoji">😔</span> Tristeza</button>
+        <button><span class="emoji">😎</span> Motivación</button>
+        <button><span class="emoji">😟</span> Preocupado</button>
+        <button><span class="emoji">😬</span> Ansioso</button>
+        <button><span class="emoji">😐</span> Aburrido</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="column">
+      <img src="/static/principios.png" alt="Logo 10 Principios" class="logo-principios">
+      <h2>¿Con cuál de nuestros principios te identificas hoy?</h2>
+      <div class="button-grid" id="principios">
+        <button><img src="/static/sonamos.png"> Soñamos en grande</button>
+        <button><img src="/static/concentramos.png"> Nos concentramos en lograr los mejores resultados</button>
+        <button><img src="/static/lideramos.png"> Lideramos con el ejemplo y asumimos responsabilidades</button>
+        <button><img src="/static/atraemos.png"> Atraemos y desarrollamos personas talentosas</button>
+        <button><img src="/static/creamos.png"> Creamos marcas que los consumidores aman</button>
+        <button><img src="/static/crecemos.png"> Crecemos con nuestros clientes y comunidades</button>
+        <button><img src="/static/priorizamos.png"> Priorizamos soluciones simples y escalables</button>
+        <button><img src="/static/costes.png"> Gestionamos nuestros costes con rigor</button>
+        <button><img src="/static/pensamos.png"> Pensamos a largo plazo</button>
+        <button><img src="/static/nunca.png"> Nunca tomamos atajos</button>
+      </div>
+    </div>
+  </div>
+  <div id="mensajeFinal">
+    <span>🎉</span>
+    ¡Gracias por compartir!
+    <div id="mensajeMotivacional"></div>
+  </div>
+  <script>
+    const emociones = document.querySelectorAll("#emociones button");
+    const principios = document.querySelectorAll("#principios button");
+    const mensajeFinal = document.getElementById("mensajeFinal");
+    const mensajeMotivacional = document.getElementById("mensajeMotivacional");
+
+    let emocionSeleccionadaTexto = "";
+    let principioSeleccionadoTexto = "";
+
+    emociones.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.disabled = true;
+        emocionSeleccionadaTexto = btn.textContent.trim();
+        checkAmbosSeleccionados();
+      });
+    });
+
+    principios.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.disabled = true;
+        principioSeleccionadoTexto = btn.textContent.trim();
+        checkAmbosSeleccionados();
+      });
+    });
+
+    function checkAmbosSeleccionados() {
+      const emocionSeleccionada = Array.from(emociones).some(btn => btn.disabled);
+      const principioSeleccionado = Array.from(principios).some(btn => btn.disabled);
+
+      if (emocionSeleccionada && principioSeleccionado) {
+        const mensajes = {
+          "Alegría": "Tu reto hoy es alegrarle el día a tus compañeros.",
+          "Tranquilidad": "Tu serenidad es una fortaleza. Compártela con quienes te rodean.",
+          "Estrés": "Respira profundo. Estás haciendo lo mejor que puedes y eso es suficiente.",
+          "Frustración": "Toda dificultad trae consigo una lección. Mañana será mejor.",
+          "Tristeza": "Está bien no estar bien. Lo importante es seguir adelante.",
+          "Motivación": "Aprovecha esta energía para inspirar a otros.",
+          "Preocupado": "Confía en tu capacidad. Has superado mucho antes y lo harás de nuevo.",
+          "Ansioso": "Enfócate en el ahora. Un paso a la vez hace el camino.",
+          "Aburrido": "Cada día es una oportunidad para aprender algo nuevo. ¡Atrévete a cambiar tu rutina!"
+        };
+
+        const clave = emocionSeleccionadaTexto.replace(/^[^\w]+/, "").trim();
+        mensajeMotivacional.innerText = mensajes[clave] || "";
+        mensajeFinal.style.display = "flex";
+
+        registrarEnCSV();
+
+        setTimeout(() => {
+          location.reload();
+        }, 4000);
+      }
+    }
+
+    function registrarEnCSV() {
+      const fecha = new Date();
+      const datos = {
+        emocion: emocionSeleccionadaTexto,
+        principio: principioSeleccionadoTexto
+      };
+
+      fetch('/registrar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      });
+    }
+  </script>
+</body>
+</html>
